@@ -28,18 +28,18 @@ def get_words_without_stopwords(text, topK=20):
 
 
 def get_word_textrank(text, topK=20):
-    # tags = jieba.analyse.textrank(text, topK=topK, withWeight=True, allowPOS=('ns', 'n', 'vn', 'v'))
-    tags = jieba.analyse.textrank(text, topK=topK, withWeight=True, allowPOS=('n'))
+    #tags = jieba.analyse.textrank(text, topK=topK, withWeight=True, allowPOS=('ns', 'n', 'vn', 'v'))
+    tags = jieba.analyse.textrank(text, topK=topK, withWeight=True, allowPOS=('ns','n'))
     return dict(tags)
 
 
 def create_word_cloud(word_freq, to_file='alice.png', max_words=300):
-    alice_mask = np.array(Image.open('pic/timg.jpeg'))
+    alice_mask = np.array(Image.open('pic/bank.png'))
 
     stopwords = set(STOPWORDS)
     # stopwords.add("said")
 
-    wc = WordCloud(background_color="black", max_words=max_words, mask=alice_mask,
+    wc = WordCloud(background_color="white", max_words=max_words, mask=alice_mask,
                    stopwords=stopwords, max_font_size=80, random_state=42,
                    font_path='/System/Library/Fonts/PingFang.ttc')
     # generate word cloud
@@ -66,4 +66,4 @@ if __name__ == '__main__':
         # text rank
         most_words3 = get_word_textrank(text, topK=max_num)
         print('>>> textRank', most_words3)
-        create_word_cloud(most_words3, to_file='bank.png', max_words=max_num)
+        create_word_cloud(most_words3, to_file='bank-n2.png', max_words=max_num)
