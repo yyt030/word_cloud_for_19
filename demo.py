@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 __author__ = 'yueyt'
-from collections import Counter
+from collections import Counter, OrderedDict
 
 import jieba
 import jieba.analyse
@@ -28,12 +28,13 @@ def get_words_without_stopwords(text, topK=20):
 
 
 def get_word_textrank(text, topK=20):
-    tags = jieba.analyse.textrank(text, topK=topK, withWeight=True, allowPOS=('ns', 'n', 'vn', 'v'))
+    # tags = jieba.analyse.textrank(text, topK=topK, withWeight=True, allowPOS=('ns', 'n', 'vn', 'v'))
+    tags = jieba.analyse.textrank(text, topK=topK, withWeight=True, allowPOS=('n'))
     return dict(tags)
 
 
 def create_word_cloud(word_freq, to_file='alice.png', max_words=300):
-    alice_mask = np.array(Image.open('pic/map.jpeg'))
+    alice_mask = np.array(Image.open('pic/timg.jpeg'))
 
     stopwords = set(STOPWORDS)
     # stopwords.add("said")
@@ -50,13 +51,12 @@ def create_word_cloud(word_freq, to_file='alice.png', max_words=300):
 
 
 if __name__ == '__main__':
-    max_num = 200
+    max_num = 300
     with open('data/xi.txt', encoding='utf8') as f:
         text = f.read()
-        jieba.load_userdict("data/SogouLabDic.dic")
         words = jieba.lcut(text)
         most_words = Counter(words).most_common(max_num)
-        most_words = without_stopwords(dict(most_words))
+        most_words = without_stopwords(OrderedDict(most_words))
         print('>>>>', most_words)
         create_word_cloud(most_words, to_file='common.png', max_words=max_num)
         # idf
@@ -66,4 +66,4 @@ if __name__ == '__main__':
         # text rank
         most_words3 = get_word_textrank(text, topK=max_num)
         print('>>> textRank', most_words3)
-        create_word_cloud(most_words3, to_file='textrank.png', max_words=max_num)
+        create_word_cloud(most_words3, to_file='bank.png', max_words=max_num)
