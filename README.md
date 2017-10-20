@@ -78,7 +78,9 @@ bar = Bar()
 bar.add("19大报告高频词", list(most_words.keys())[:20], list(most_words.values())[:20], 
         is_convert=True, is_label_show=True,yaxis_interval=0)
 ```
+
 ![ma-v2](map2.png)
+
 从数据中不难看出：
 + 发展 是第一要务
 + 坚持 以 人民 为中心
@@ -90,7 +92,7 @@ bar.add("19大报告高频词", list(most_words.keys())[:20], list(most_words.va
 哦，毫无疑问，
 推进，坚持， 实现，加强，创新，治理 榜上有名啊；
 最后以一个名词的词云结束今天的分析： ** 中国，社会主义，人民，国家，制度，体系 **
-![]("bank-n2.png")
+![](bank-n2.png)
 
 ### 总结
 通篇代码不超过30行，为文本分析提供参考，同时，有空的话，可以深入下通过人工智能的方式提供文章的摘要
